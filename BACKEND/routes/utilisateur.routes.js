@@ -6,8 +6,17 @@ module.exports = app => {
     var router = require("express").Router();
   
 
-    // login utilisateur
+    // Login
     router.post("/login", utilisateur.login);
+
+    // Register
+    router.post("/register", utilisateur.register);
+
+    // Update login
+    router.post("/updateUserLogin", checkJwt, utilisateur.updateUserLogin);
+
+    // Update password
+    router.post("/updateUserPassword", checkJwt, utilisateur.updateUserPassword);
   
     app.use('/api/utilisateur', router);
   };

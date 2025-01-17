@@ -1,0 +1,55 @@
+.account-manager-container {
+
+  .account-data {
+    margin-bottom: 24px;
+
+    .account-data-header {
+      font-weight: bold;
+      font-size: large;
+      margin-bottom: 8px;
+    }
+
+    .data-name {
+
+    }
+
+    .data-surname {
+
+    }
+
+    .data-login {
+
+    }
+  }
+
+  .update-account {
+
+    .update-account-header {
+      font-weight: bold;
+      font-size: large;
+      margin-bottom: 8px;
+    }
+
+    .update-login {
+
+      .update-login-title {
+
+      }
+    }
+
+    .update-password {
+
+      .update-password-title {
+
+      }
+    }
+  }
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}

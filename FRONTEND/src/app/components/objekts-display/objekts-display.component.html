@@ -1,0 +1,20 @@
+
+
+<!-- <div *ngFor="let objekt of objekts$ | async; let i = index"> -->
+
+
+
+<div class="objekts-display-container">
+  <h2> Hello {{ login }} ! <br/> Here are objekts you might want :</h2>
+
+  <div class="objekts-filter">
+    <!-- <search-filter [objekts]="filteredObjekts" [baseObjekts]="objekts" (onFilterChange)="updateDisplayedObjekts($event)"></search-filter> -->
+    <search-filter [(objekts)]="displayedObjekts" [baseObjekts]="objekts"></search-filter>
+  </div>
+
+  <div class="objekts-list">
+    @for (objekt of displayedObjekts; track $index) {
+      <div>{{ objekt.nom }} - {{ objekt.prix }} € ({{ objekt.description }}) - stock left : {{ objekt.stock }}</div>
+    }
+  </div>
+</div>

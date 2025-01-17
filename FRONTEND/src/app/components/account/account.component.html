@@ -1,0 +1,70 @@
+<div class="account-manager-container">
+  <h2 class="title">My account</h2>
+
+  <!-- Lister les données de l'utilisateur provenant du stockage local -->
+  <div class="account-data">
+    <div class="account-data-header">Account data</div>
+    <div class="data-name">
+      Name : {{ name }}
+    </div>
+    <div class="data-surname">
+      Surname : {{ surname }}
+    </div>
+    <div class="data-login">
+      Login : {{ login }}
+    </div>
+  </div>
+
+  <!-- Modifications des données du compte -->
+  <div class="update-account">
+    <div class="update-account-header">
+      Update your account data
+    </div>
+
+    <div class="update-login">
+      <div class="update-login-title">
+        Update login
+      </div>
+      <form [formGroup]="update_login_form" (ngSubmit)="submitNewLogin()">
+        <label for="login">Login : </label>
+        <input name="login" type="text" formControlName="login"/>
+        <br>
+        <label for="login_confirm">Login confirmation : </label>
+        <input name="login_confirm" type="text" formControlName="login_confirm"/>
+        <br>
+        @if (errorMessageLogin != '') {
+          <div class="error">{{ errorMessageLogin }}</div>
+          <br/>
+        }
+        <button [disabled]="!update_login_form.valid">Submit new login</button>
+      </form>
+      @if (successMessageLogin != '') {
+        <br>
+        <div class="success">{{ successMessageLogin }}</div>
+      }
+    </div>
+
+    <div class="update-password">
+      <div class="update-password-title">
+        Update password
+      </div>
+      <form [formGroup]="update_password_form" (ngSubmit)="submitNewPassword()">
+        <label for="password">Password : </label>
+        <input name="password" type="password" formControlName="password"/>
+        <br>
+        <label for="password_confirm">Password confirmation : </label>
+        <input name="password_confirm" type="password" formControlName="password_confirm"/>
+        <br>
+        @if (errorMessagePassword != '') {
+          <div class="error">{{ errorMessagePassword }}</div>
+          <br/>
+        }
+        <button [disabled]="!update_password_form.valid">Submit new password</button>
+      </form>
+      @if (successMessagePassword != '') {
+        <br>
+        <div class="success">{{ successMessagePassword }}</div>
+      }
+    </div>
+  </div>
+</div>

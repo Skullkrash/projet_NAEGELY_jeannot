@@ -1,0 +1,36 @@
+.objekts-home {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .objekts-home-title {
+
+  }
+
+  .objekts-home-subtitle {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .objekts-home-account {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+
+    .login {
+
+    }
+
+    .register {
+
+    }
+  }
+}

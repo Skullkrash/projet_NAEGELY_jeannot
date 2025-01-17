@@ -4,7 +4,8 @@ module.exports = (sequelize, Sequelize) => {
    id: {
         type: Sequelize.STRING,
         primaryKey:true,
-        allowNull: false
+        allowNull: false,
+        autoIncrement: true
       },  
     nom: {
       type: Sequelize.STRING,
@@ -18,7 +19,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false
     },
-    pass: {
+    password: {
         type: Sequelize.STRING,
     }
  });

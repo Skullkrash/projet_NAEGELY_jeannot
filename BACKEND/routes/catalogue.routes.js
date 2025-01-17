@@ -6,8 +6,8 @@ module.exports = app => {
     var router = require("express").Router();
   
 
-   
-    router.get("/", checkJwt,catalogue.get);
+    // Retrieve all Objekts
+    router.get("/", checkJwt, catalogue.get);
   
     app.use('/api/catalogue', router);
   };

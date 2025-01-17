@@ -1,0 +1,37 @@
+<h2>Register an account</h2>
+<form [formGroup]="new_user_form" (ngSubmit)="submitUserForm()">
+
+    <label for="first_name">First name : </label>
+    <input id="first_name" type="text" formControlName="first_name"/>
+    <br>
+
+    <label for="last_name">Last name : </label>
+    <input name="last_name" type="text" formControlName="last_name"/>
+    <br>
+
+    <label for="login">Login : </label>
+    <input name="login" type="text" formControlName="login"/>
+    <br>
+
+    <label for="password">Password : </label>
+    <input name="password" type="password" formControlName="password"/>
+    <br>
+
+    <label for="password_confirm">Password : </label>
+    <input name="password_confirm" type="password" formControlName="password_confirm"/>
+    <br>
+    @if (errorMessage != '') {
+      <div class="error">{{ errorMessage }}</div>
+      <br/>
+    }
+
+
+    <button [disabled]="!new_user_form.valid">Submit user informations</button>
+</form>
+
+@if (successMessage != '') {
+  <br>
+  <div class="success">{{ successMessage }}</div>
+}
+<br>
+<button [routerLink]="'/home'">Return to main menu</button>

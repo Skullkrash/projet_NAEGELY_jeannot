@@ -1,0 +1,19 @@
+.active-route {
+  background-color: #f8f9fa;
+  color: #007bff;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+:not(.active-route):hover {
+  background-color: #f8f9fa;
+  color: #007bff;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}

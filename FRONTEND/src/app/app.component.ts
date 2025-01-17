@@ -1,13 +1,23 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { TetiereComponent } from './components/tetiere/tetiere.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, TetiereComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'projet_naegely_jeannot';
+export class AppComponent implements OnInit {
+  showTetiere: boolean = false;
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.router.events.subscribe(() => {
+      const currentUrl = this.router.url;
+      this.showTetiere = !['/login', '/register', '/home'].includes(currentUrl);
+    });
+  }
 }
