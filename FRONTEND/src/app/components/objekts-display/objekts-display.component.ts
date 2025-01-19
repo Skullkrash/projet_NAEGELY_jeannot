@@ -4,7 +4,8 @@ import { ApiService } from '../../shared/services/api/api.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { SearchFilterComponent } from '../search-filter/search-filter.component';
-import { Observable } from 'rxjs';
+import { Store } from '@ngxs/store';
+import { AddObjekt } from '../../shared/actions/objekt-actions';
 
 @Component({
   selector: 'objekts-display',
@@ -19,9 +20,9 @@ export class ObjektsDisplayComponent implements OnInit {
   public objekts: Objekt[] = [];
   public displayedObjekts: Objekt[] = [];
 
-  constructor(private apiService: ApiService, private router: Router) {
+  constructor(private apiService: ApiService, private router: Router, private store: Store) {
     this.login = localStorage.getItem('login') || '';
-    if (!this.login) {
+    if (this.login === '') {
       this.router.navigate(['/home']);
     }
   }
@@ -35,5 +36,11 @@ export class ObjektsDisplayComponent implements OnInit {
 
   public updateDisplayedObjekts(newObjektList: Objekt[]) {
     this.displayedObjekts = newObjektList;
+  }
+
+  public addObjekt(newObjektForCart: Objekt) {
+    newObjektForCart.stock = 1;
+    this.store.dispatch(new AddObjekt(newObjektForCart));
+    console.log("Should have sent objekt \"" + newObjektForCart.nom + "\" to store...");
   }
 }

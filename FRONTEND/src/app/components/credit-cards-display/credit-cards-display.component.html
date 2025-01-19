@@ -1,0 +1,20 @@
+<div>
+  <h2>Credit cards list :</h2>
+
+  @if (cards.length != 0) {
+    <div class="card-displayer">
+    @for (creditCard of cards; track $index) {
+      <div class="card">
+        <div class="card-info card-number">{{ creditCard.number | creditCardNumber }}</div>
+        <div class="card-info card-owner">{{ creditCard.owner }}</div>
+        <div class="card-info card-expiry-date">{{ creditCard.expiryDate }}</div>
+        <div class="card-info card-ccv">{{ creditCard.ccv }}</div>
+      </div>
+    }
+    </div>
+  }
+  @else {
+    <div class="no-card">No credit card registered</div>
+  }
+
+</div>

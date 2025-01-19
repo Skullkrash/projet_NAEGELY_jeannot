@@ -43,6 +43,27 @@
 
       }
     }
+
+    .credit-cards-manager {
+
+      .credit-cards-manager-header {
+        font-weight: bold;
+        font-size: large;
+        margin-bottom: 8px;
+      }
+
+      .add-credit-card {
+        &.hide {
+          display: none;
+        }
+
+        .add-credit-card-title {
+
+        }
+
+
+      }
+    }
   }
 }
 

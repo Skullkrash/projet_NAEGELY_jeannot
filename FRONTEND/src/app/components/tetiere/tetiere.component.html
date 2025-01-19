@@ -1,3 +1,4 @@
 <button class="button objekts" [routerLink]="'/objekts'" [routerLinkActive]="'active-route'">Objekts</button>
 <button class="button profile" [routerLink]="'/account'" [routerLinkActive]="'active-route'">My account</button>
+<button [routerLink]="'/cart'">Shopping cart ({{ nb$ | async }})</button>
 <button class="button disconnect" (click)="Logout()">Logout</button>

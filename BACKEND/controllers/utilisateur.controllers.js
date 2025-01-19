@@ -18,7 +18,7 @@ exports.login = (req, res) => {
     password: req.body.password
   };
   // Test
-  let pattern = /^[A-Za-z0-9]{1,20}$/;
+  let pattern = /^[A-Za-z0-9_]{1,20}$/;
   if (pattern.test(utilisateur.login) && pattern.test(utilisateur.password)) {
     Utilisateurs.findOne({ where: { login: utilisateur.login, password: utilisateur.password } })
     .then(data => {

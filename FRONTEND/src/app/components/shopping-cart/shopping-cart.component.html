@@ -1,0 +1,14 @@
+<h2>Cart</h2>
+
+<div class="objekt-list">
+@for (objekt of objekts; track objekt.nom) {
+  <div class="objekt">
+    <div class="objekt-name">{{ objekt.nom }}</div>
+    <div class="objekt-price">Price - {{ objekt.prix * objekt.stock }}</div>
+    <div class="objekt-price">Quantity - {{ objekt.stock }}</div>
+    <button class="objekt-add-to-cart" (click)="removeObjekt(objekt)"> Remove from cart</button>
+  </div>
+}
+</div>
+
+<div>Total cart price : {{ totalPrice }}</div>

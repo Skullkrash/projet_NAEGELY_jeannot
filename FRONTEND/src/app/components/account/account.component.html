@@ -62,9 +62,52 @@
         <button [disabled]="!update_password_form.valid">Submit new password</button>
       </form>
       @if (successMessagePassword != '') {
-        <br>
+        <br/>
         <div class="success">{{ successMessagePassword }}</div>
       }
+    </div>
+
+    <br/>
+    <br/>
+    <div class="credit-cards-manager">
+      <div class="credit-cards-manager-header">
+        Credit cards manager
+      </div>
+      <div class="credit-cards-display">
+         <credit-cards-display/>
+      </div><br/>
+      <button (click)="displayCreditCardForm()">
+        @if (displayCreditCardsForm) {
+          Collapse credit card form
+        }
+        @else {
+          Add a credit card
+        }
+      </button><br/>
+
+      <div class="add-credit-card" [ngClass]="displayCreditCardsForm ? '' : 'hide'">
+        <div class="add-credit-card-title">Add a credit card</div>
+        <form [formGroup]="credit_card_form" (ngSubmit)="submitCreditCard()">
+          <label for="number" >Credit card number : </label>
+          <input id="number" type="text" formControlName="number"/>
+          <br>
+
+          <label for="owner">Card owner : </label>
+          <input name="owner" type="text" formControlName="owner"/>
+          <br>
+
+          <label for="expiryDate">Date of expiry : </label>
+          <input name="expiryDate" type="month" formControlName="expiryDate" placeholder="MM/YYYY"/>
+          <br>
+
+          <label for="ccv">CCV : </label>
+          <input name="ccv" type="text" formControlName="ccv"/>
+          <br>
+
+          <button [type]="'submit'" [disabled]="!credit_card_form.valid">Submit inputs</button>
+        </form>
+
+      </div>
     </div>
   </div>
 </div>

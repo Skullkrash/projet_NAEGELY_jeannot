@@ -3,11 +3,16 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule, F
 import { ApiService } from '../../shared/services/api/api.service';
 import { Router } from '@angular/router';
 import { HttpResponseMessage } from '../../shared/models/HttpResponseMessage';
+import { CreditCardsService } from '../../shared/services/credit-cards/credit-cards.service';
+import { DateMonthValidator } from '../../shared/validators/date-month.validator';
+import { CreditCard } from '../../shared/models/CreditCard';
+import { CreditCardsDisplayComponent } from '../credit-cards-display/credit-cards-display.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'account',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CreditCardsDisplayComponent, CommonModule],
   templateUrl: './account.component.html',
   styleUrl: './account.component.scss'
 })
@@ -17,16 +22,17 @@ export class AccountComponent implements OnInit {
   public login: string = '';
   public update_login_form: FormGroup;
   public update_password_form: FormGroup;
+  public credit_card_form: FormGroup;
   public errorMessageLogin: string = '';
   public successMessageLogin: string = '';
   public errorMessagePassword: string = '';
   public successMessagePassword: string = '';
+  public displayCreditCardsForm: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private creditCardsService: CreditCardsService, private router: Router) {
     if (!localStorage.getItem('login')) {
       this.router.navigate(['/home']);
     }
-
     this.update_login_form = this.formBuilder.group({
       login: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
       login_confirm: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
@@ -35,28 +41,18 @@ export class AccountComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
       password_confirm: ['', [Validators.required, , Validators.minLength(5), Validators.maxLength(15)]],
     });
+    this.credit_card_form = this.formBuilder.group({
+      number: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(16), Validators.maxLength(16)]),
+      owner: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z \-éèêàâçîïôûùäëïöü]+$')]),
+      expiryDate: new FormControl('', [Validators.required, DateMonthValidator.dateMonthValidator]),
+      ccv: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(3), Validators.maxLength(3)]),
+    });
   }
 
   ngOnInit(): void {
     this.name = localStorage.getItem('name') || '';
     this.surname = localStorage.getItem('surname') || '';
     this.login = localStorage.getItem('login') || '';
-  }
-
-  public get login_form() {
-    return this.update_login_form.get('login');
-  }
-
-  public get login_confirm() {
-    return this.update_login_form.get('login_confirm');
-  }
-
-  public get password() {
-    return this.update_password_form.get('password');
-  }
-
-  public get password_confirm() {
-    return this.update_password_form.get('password_confirm');
   }
 
   public submitNewLogin(): void {
@@ -86,6 +82,16 @@ export class AccountComponent implements OnInit {
     });
   }
 
+  public submitCreditCard() {
+    let newCard: CreditCard = { number: this.number?.value, owner: this.owner?.value, expiryDate: this.expiryDate?.value, ccv: this.ccv?.value};
+    this.creditCardsService.addCard(newCard);
+    this.credit_card_form.reset();
+  }
+
+  public displayCreditCardForm(): void {
+    this.displayCreditCardsForm = !this.displayCreditCardsForm;
+  }
+
   private resetMessages(): void {
     this.errorMessageLogin = '';
     this.errorMessagePassword = '';
@@ -93,4 +99,35 @@ export class AccountComponent implements OnInit {
     this.successMessagePassword = '';
   }
 
+  public get login_form() {
+    return this.update_login_form.get('login');
+  }
+
+  public get login_confirm() {
+    return this.update_login_form.get('login_confirm');
+  }
+
+  public get password() {
+    return this.update_password_form.get('password');
+  }
+
+  public get password_confirm() {
+    return this.update_password_form.get('password_confirm');
+  }
+
+  public get number() {
+    return this.credit_card_form.get('number');
+  }
+
+  public get owner() {
+    return this.credit_card_form.get('owner');
+  }
+
+  public get expiryDate() {
+    return this.credit_card_form.get('expiryDate');
+  }
+
+  public get ccv() {
+    return this.credit_card_form.get('ccv');
+  }
 }
